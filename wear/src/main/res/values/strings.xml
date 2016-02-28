@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">SplatWatch</string>
+    <string name="my_digital_name">Splatoon</string>
+
+    <string name="wear_capabilities">splatoon_map_updates</string>
+    <string name="data_socket_identifier">/map_updates</string>
+    <string name="request_update">request_update</string>
+
+
+</resources>
