@@ -6,7 +6,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import butterknife.ButterKnife;
-import butterknife.InjectView;
+import butterknife.Bind;
 import nz.co.panpanini.splatwatch.R;
 
 /**
@@ -14,14 +14,14 @@ import nz.co.panpanini.splatwatch.R;
  */
 public class MapListView extends LinearLayout {
 
-    @InjectView(R.id.name)
+    @Bind(R.id.name)
     protected TextView nameTextView;
 
     public MapListView(Context context) {
         super(context);
         LayoutInflater.from(context).inflate(R.layout.map_list_view, this);
 
-        ButterKnife.inject(this);
+        ButterKnife.bind(this);
     }
 
     public void setName(String name){

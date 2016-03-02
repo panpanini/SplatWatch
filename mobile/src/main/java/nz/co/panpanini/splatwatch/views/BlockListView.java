@@ -9,8 +9,8 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 import nz.co.panpanini.datalayer.models.Block;
 import nz.co.panpanini.splatwatch.R;
 
@@ -19,12 +19,12 @@ import nz.co.panpanini.splatwatch.R;
  */
 public class BlockListView extends LinearLayout {
 
-    @InjectView(R.id.block_title)
+    @Bind(R.id.block_title)
     protected TextView blockTitle;
 
-    @InjectView(R.id.regular_map_section)
+    @Bind(R.id.regular_map_section)
     protected MapSectionView regularSection;
-    @InjectView(R.id.ranked_map_section)
+    @Bind(R.id.ranked_map_section)
     protected MapSectionView rankedSection;
 
     public BlockListView(Context context) {
@@ -32,7 +32,7 @@ public class BlockListView extends LinearLayout {
 
         inflate(context, R.layout.block_list_view, this);
 
-        ButterKnife.inject(this);
+        ButterKnife.bind(this);
 
     }
 

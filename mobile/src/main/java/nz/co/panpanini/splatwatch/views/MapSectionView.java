@@ -8,7 +8,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import butterknife.ButterKnife;
-import butterknife.InjectView;
+import butterknife.Bind;
 import nz.co.panpanini.splatwatch.R;
 
 /**
@@ -16,14 +16,14 @@ import nz.co.panpanini.splatwatch.R;
  */
 public class MapSectionView extends LinearLayout {
 
-    @InjectView(R.id.title)
+    @Bind(R.id.title)
     protected TextView title;
 
-    @InjectView(R.id.map_1)
+    @Bind(R.id.map_1)
     protected TextView map1;
-    @InjectView(R.id.map_2)
+    @Bind(R.id.map_2)
     protected TextView map2;
-    @InjectView(R.id.map_3)
+    @Bind(R.id.map_3)
     protected TextView map3;
 
     public MapSectionView(Context context, AttributeSet attrs, int defStyleAttr) {
@@ -31,7 +31,7 @@ public class MapSectionView extends LinearLayout {
 
         LayoutInflater.from(context).inflate(R.layout.map_section, this);
 
-        ButterKnife.inject(this);
+        ButterKnife.bind(this);
     }
 
     public MapSectionView(Context context, AttributeSet attrs){
