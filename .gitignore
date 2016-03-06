@@ -33,3 +33,6 @@ captures/
 
 #intellij stuff
 .idea/
+
+#signing keys
+**/signing.properties
