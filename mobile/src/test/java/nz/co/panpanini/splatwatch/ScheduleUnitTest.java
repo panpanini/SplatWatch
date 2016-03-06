@@ -1,14 +1,23 @@
 package nz.co.panpanini.splatwatch;
 
+import android.content.Context;
+import android.content.res.Configuration;
+import android.content.res.Resources;
+
 import com.google.gson.JsonParser;
 
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mockito;
+
+import java.util.Locale;
 
 import nz.co.panpanini.datalayer.models.Block;
 import nz.co.panpanini.datalayer.models.Schedule;
+
+import static org.mockito.Mockito.when;
 
 
 /**
@@ -22,10 +31,17 @@ public class ScheduleUnitTest {
 
     Schedule schedule;
 
+    Context context;
+
     @Before
     public void setup(){
         JsonParser parser = new JsonParser();
         schedule = Schedule.fromJson(parser.parse(json).getAsJsonObject());
+
+        context = Mockito.mock(Context.class);
+        when(context.getResources()).thenReturn(Mockito.mock(Resources.class));
+        when(context.getResources().getConfiguration()).thenReturn(Mockito.mock(Configuration.class));
+        context.getResources().getConfiguration().locale = Locale.ENGLISH;
     }
 
     @After
@@ -45,10 +61,10 @@ public class ScheduleUnitTest {
     public void testRegularMapParsing(){
         Block schedule = this.schedule.getBlocks().get(0);
 
-        Assert.assertEquals("Name does not match", schedule.getRegularMaps().getMaps().get(0).getNameEN(), "Blackbelly Skatepark");
-        Assert.assertEquals("Name does not match", schedule.getRegularMaps().getMaps().get(1).getNameEN(), "Mahi-Mahi Resort");
+        Assert.assertEquals("Name does not match", schedule.getRegularMaps().getMaps().get(0).getName(context), "Blackbelly Skatepark");
+        Assert.assertEquals("Name does not match", schedule.getRegularMaps().getMaps().get(1).getName(context), "Mahi-Mahi Resort");
 
-        Assert.assertEquals("Rules do not match", schedule.getRegularMaps().getRulesEN(), "Turf War");
+        Assert.assertEquals("Rules do not match", schedule.getRegularMaps().getRules(context), "Turf War");
 
         Assert.assertEquals("Start time does not match", schedule.getStartTime(), 1452103200000L);
         Assert.assertEquals("End time does not match", schedule.getEndTime(), 1452117600000L);
@@ -59,10 +75,10 @@ public class ScheduleUnitTest {
     public void testRankedMapParsing(){
         Block schedule = this.schedule.getBlocks().get(0);
 
-        Assert.assertEquals("Name does not match", schedule.getRankedMaps().getMaps().get(0).getNameEN(), "Urchin Underpass");
-        Assert.assertEquals("Name does not match", schedule.getRankedMaps().getMaps().get(1).getNameEN(), "Walleye Warehouse");
+        Assert.assertEquals("Name does not match", schedule.getRankedMaps().getMaps().get(0).getName(context), "Urchin Underpass");
+        Assert.assertEquals("Name does not match", schedule.getRankedMaps().getMaps().get(1).getName(context), "Walleye Warehouse");
 
-        Assert.assertEquals("Rules do not match", schedule.getRankedMaps().getRulesEN(), "Splat Zones");
+        Assert.assertEquals("Rules do not match", schedule.getRankedMaps().getRules(context), "Splat Zones");
 
         Assert.assertEquals("Start time does not match", schedule.getStartTime(), 1452103200000L);
         Assert.assertEquals("End time does not match", schedule.getEndTime(), 1452117600000L);

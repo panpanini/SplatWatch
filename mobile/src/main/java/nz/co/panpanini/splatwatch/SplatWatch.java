@@ -47,10 +47,10 @@ public class SplatWatch extends Application {
 
         ArrayList strings = new ArrayList();
 
-        strings.add("Regular: " + schedule.getBlocks().get(0).getRegularMaps().getRulesEN());
+        strings.add(getString(R.string.regular_title));
 
         for (Map map : schedule.getBlocks().get(0).getRegularMaps().getMaps()){
-            strings.add(map.getNameEN());
+            strings.add(map.getName(this));
         }
 
         Courier.deliverData(this, "/regular_maps", strings);
@@ -58,10 +58,10 @@ public class SplatWatch extends Application {
         strings = new ArrayList();
 
         if (schedule.getBlocks().get(0).getRankedMaps() != null){
-            strings.add("Ranked: " + schedule.getBlocks().get(0).getRankedMaps().getRulesEN());
+            strings.add(getString(R.string.ranked_title) + ": " + schedule.getBlocks().get(0).getRankedMaps().getRules(this));
 
             for (Map map : schedule.getBlocks().get(0).getRankedMaps().getMaps()){
-                strings.add(map.getNameEN());
+                strings.add(map.getName(this));
             }
         }
 

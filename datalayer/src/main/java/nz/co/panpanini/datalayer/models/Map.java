@@ -1,10 +1,13 @@
 
 package nz.co.panpanini.datalayer.models;
 
+import android.content.Context;
 import android.os.Parcel;
 import android.os.Parcelable;
 
 import com.google.gson.JsonObject;
+
+import java.util.Locale;
 
 public class Map implements Parcelable{
 
@@ -44,7 +47,7 @@ public class Map implements Parcelable{
      * @return
      *     The nameJP
      */
-    public String getNameJP() {
+    private String getNameJP() {
         return nameJP;
     }
 
@@ -54,10 +57,17 @@ public class Map implements Parcelable{
      * @return
      *     The nameEN
      */
-    public String getNameEN() {
+    private String getNameEN() {
         return nameEN;
     }
 
+    public String getName(Context context){
+        if (context.getResources().getConfiguration().locale.equals(Locale.JAPAN)){
+            return getNameJP();
+        }
+
+        return getNameEN();
+    }
 
 
     public static Map fromJson(JsonObject json){
