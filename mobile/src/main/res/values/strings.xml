@@ -6,7 +6,9 @@
 
     <string name="action_settings">Settings</string>
 
-    <string name="wear_capabilities">splatoon_map_updates</string>
-    <string name="data_socket_identifier">/map_updates</string>
-    <string name="request_update">request_update</string>
+    <string name="wear_capabilities" translatable="false">splatoon_map_updates</string>
+    <string name="data_socket_identifier" translatable="false">/map_updates</string>
+    <string name="request_update" translatable="false">request_update</string>
+    <string name="regular_title">Regular</string>
+    <string name="ranked_title">Ranked</string>
 </resources>

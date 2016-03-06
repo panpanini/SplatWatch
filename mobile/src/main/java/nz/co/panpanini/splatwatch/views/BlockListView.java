@@ -8,6 +8,7 @@ import android.widget.TextView;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -43,19 +44,19 @@ public class BlockListView extends LinearLayout {
 
         blockTitle.setText(getFormattedDate(new Date(block.getStartTime())));
 
-        regularSection.setTitle("Regular - " + block.getRegularMaps().getRulesEN());
-        regularSection.setMap1Text(block.getRegularMaps().getMaps().get(0).getNameEN());
-        regularSection.setMap2Text(block.getRegularMaps().getMaps().get(1).getNameEN());
+        regularSection.setTitle(getResources().getString(R.string.regular_title) + " - " + block.getRegularMaps().getRules(getContext()));
+        regularSection.setMap1Text(block.getRegularMaps().getMaps().get(0).getName(getContext()));
+        regularSection.setMap2Text(block.getRegularMaps().getMaps().get(1).getName(getContext()));
         if (block.getRegularMaps().getMaps().size() > 2) {
-            regularSection.setMap3Text(block.getRegularMaps().getMaps().get(2).getNameEN());
+            regularSection.setMap3Text(block.getRegularMaps().getMaps().get(2).getName(getContext()));
         }else {
             regularSection.setMap3Text("");
         }
 
         if (block.getRankedMaps() != null) {
-            rankedSection.setTitle("Ranked - " + block.getRankedMaps().getRulesEN());
-            rankedSection.setMap1Text(block.getRankedMaps().getMaps().get(0).getNameEN());
-            rankedSection.setMap2Text(block.getRankedMaps().getMaps().get(1).getNameEN());
+            rankedSection.setTitle(getResources().getString(R.string.ranked_title) + " - " + block.getRankedMaps().getRules(getContext()));
+            rankedSection.setMap1Text(block.getRankedMaps().getMaps().get(0).getName(getContext()));
+            rankedSection.setMap2Text(block.getRankedMaps().getMaps().get(1).getName(getContext()));
             rankedSection.setMap3Text("");
             rankedSection.setVisibility(View.VISIBLE);
         }else{
@@ -63,10 +64,23 @@ public class BlockListView extends LinearLayout {
         }
     }
 
-    String getFormattedDate(Date date) {
+
+
+
+
+    private String getFormattedDate(Date date) {
+        if (getContext().getResources().getConfiguration().locale.equals(Locale.JAPAN)) {
+            return getFormattedDateJp(date);
+        }
+            return getFormattedDateEn(date);
+    }
+
+    private String getFormattedDateJp(Date date){
+        return new SimpleDateFormat("d'日' - HH:MM").format(date); }
+
+    private String getFormattedDateEn(Date date){
         Calendar cal = Calendar.getInstance();
         cal.setTime(date);
-        //2nd of march 2015
         int day = cal.get(Calendar.DATE);
 
         switch (day % 10) {

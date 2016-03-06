@@ -1,6 +1,7 @@
 
 package nz.co.panpanini.datalayer.models;
 
+import android.content.Context;
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -9,6 +10,7 @@ import com.google.gson.JsonObject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class Mode implements Parcelable{
 
@@ -55,7 +57,7 @@ public class Mode implements Parcelable{
      * @return
      *     The rulesJP
      */
-    public String getRulesJP() {
+    private String getRulesJP() {
         return rulesJP;
     }
 
@@ -64,10 +66,18 @@ public class Mode implements Parcelable{
      * @return
      *     The rulesEN
      */
-    public String getRulesEN() {
+    private String getRulesEN() {
         return rulesEN;
     }
 
+
+    public String getRules(Context context){
+        if (context.getResources().getConfiguration().locale.equals(Locale.JAPAN)){
+            return getRulesJP();
+        }
+
+        return getRulesEN();
+    }
 
     public static Mode fromJson(JsonObject json){
         Mode mode = new Mode();
