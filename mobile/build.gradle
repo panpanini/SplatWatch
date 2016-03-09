@@ -6,11 +6,13 @@ repositories {
 
 def signingProperties
 
-file("src/main/assets/signing.properties").withReader { reader ->
-    signingProperties = new Properties()
-    signingProperties.load(reader)
-
+if (project.file('src/main/assets/signing.properties').exists()) {
+    file("src/main/assets/signing.properties").withReader { reader ->
+        signingProperties = new Properties()
+        signingProperties.load(reader)
+    }
 }
+
 
 android {
     compileSdkVersion 23
